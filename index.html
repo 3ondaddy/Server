@@ -6,17 +6,286 @@
   <title>AI 서버 자판기 — 점주(설치자) 모집</title>
   <meta name="description" content="AI 서버 자판기(ServerVending) — 켜두기만 해도 돈 버는 부업. 공간과 전기만 있으면 누구나 참여 가능. 지금 점주로 신청하세요." />
   <style>
-    body{font-family:Inter,system-ui;background:#f8fafc;margin:0;padding:0}
-    .container{max-width:900px;margin:0 auto;padding:20px}
-    h1{color:#1e3a8a}
-    button{background:#2563eb;color:white;border:none;padding:10px 18px;border-radius:8px;cursor:pointer}
+    :root{
+      --accent:#2563eb; /* blue-600 */
+      --muted:#6b7280;
+      --card:#ffffff;
+      --bg:#f8fafc;
+      --glass: rgba(255,255,255,0.7);
+      --radius:16px;
+      font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+    }
+    *{box-sizing:border-box}
+    body{margin:0;background:linear-gradient(180deg,#f8fafc 0%, #ffffff 100%);color:#111827}
+    .container{max-width:1100px;margin:32px auto;padding:24px}
+    header{display:flex;align-items:center;justify-content:space-between}
+    .brand{display:flex;gap:12px;align-items:center}
+    .logo{width:56px;height:56px;border-radius:12px;background:var(--accent);display:flex;align-items:center;justify-content:center;color:white;font-weight:700}
+    h1{margin:0;font-size:28px}
+    p.lead{color:var(--muted);margin:6px 0 0}
+
+    /* Hero */
+    .hero{display:grid;grid-template-columns:1fr 420px;gap:28px;align-items:center;margin-top:28px}
+    .hero-card{background:var(--card);border-radius:var(--radius);padding:28px;box-shadow:0 8px 30px rgba(2,6,23,0.06)}
+    .hero h2{font-size:26px;margin:0 0 8px}
+    .hero .kicker{font-weight:700;color:var(--accent);font-size:14px}
+    .cta{display:flex;gap:12px;margin-top:18px}
+    .btn{padding:12px 16px;border-radius:12px;border:0;cursor:pointer;font-weight:600}
+    .btn-primary{background:var(--accent);color:white}
+    .btn-ghost{background:transparent;border:1px solid #e5e7eb;color:var(--accent)}
+
+    /* features */
+    .grid-3{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:20px}
+    .feature{background:linear-gradient(180deg,#ffffff, #fbfbff);padding:16px;border-radius:12px;border:1px solid #eef2ff}
+    .feature h4{margin:4px 0}
+    .muted{color:var(--muted);font-size:14px}
+
+    /* pricing table */
+    .table{margin-top:22px;border-radius:12px;overflow:hidden}
+    table{width:100%;border-collapse:collapse;background:white}
+    th,td{padding:12px;border-bottom:1px solid #f3f4f6;text-align:center}
+    th{background:linear-gradient(90deg,#eef2ff,#ffffff);color:#064e3b;font-weight:700}
+
+    /* steps */
+    .steps{display:flex;gap:12px;margin-top:18px}
+    .step{flex:1;background:var(--card);padding:14px;border-radius:12px;border:1px solid #f1f5f9}
+
+    /* testimonial + footer form */
+    .testimonial{margin-top:20px;display:flex;gap:16px}
+    .test-card{flex:1;background:linear-gradient(180deg,#ffffff,#fbfbff);padding:18px;border-radius:12px}
+
+    .form{background:linear-gradient(180deg,#ffffff,#fcfcff);padding:18px;border-radius:12px;border:1px solid #eef2ff}
+    .form input, .form select{width:100%;padding:10px;margin-top:8px;border-radius:10px;border:1px solid #e6e9ee}
+    .form label{font-weight:600;font-size:14px}
+
+    footer{margin-top:28px;text-align:center;color:var(--muted);font-size:14px;padding:18px}
+
+    /* responsive */
+    @media (max-width:900px){
+      .hero{grid-template-columns:1fr;}
+      .grid-3{grid-template-columns:repeat(1,1fr)}
+      .steps{flex-direction:column}
+    }
   </style>
 </head>
 <body>
   <div class="container">
-    <h1>AI 서버 자판기 — 점주 모집</h1>
-    <p>AI 시대, 켜두기만 해도 돈 버는 부업! 공간과 전기만 있으면 누구나 참여할 수 있습니다.</p>
-    <button onclick="alert('Netlify에 업로드 완료 후 실제 신청폼으로 연결 가능합니다.')">지금 신청하기</button>
+    <header>
+      <div class="brand">
+        <div class="logo">SV</div>
+        <div>
+          <h1>AI 서버 자판기</h1>
+          <p class="lead">켜두기만 해도 돈 버는 부업 — 공간과 전기만 있으면 누구나 참여 가능합니다.</p>
+        </div>
+      </div>
+      <nav>
+        <button class="btn btn-ghost" onclick="document.getElementById('apply').scrollIntoView({behavior:'smooth'})">점주 신청</button>
+      </nav>
+    </header>
+
+    <main>
+      <section class="hero">
+        <div class="hero-card">
+          <div class="kicker">부업으로 시작하는 AI 인프라</div>
+          <h2>AI 시대, 켜두기만 해도 수익이 쌓입니다</h2>
+          <p class="muted">한 번 설치하면 24시간 자동으로 수익을 만드는 ‘서버 자판기’. 평균 5~14개월 내 투자금 회수 목표.</p>
+
+          <div class="grid-3" style="margin-top:18px">
+            <div class="feature">
+              <h4>쉬운 설치</h4>
+              <p class="muted">전기와 공간만 있으면 기술팀이 대신 설치·연동해드립니다.</p>
+            </div>
+            <div class="feature">
+              <h4>원금 보전</h4>
+              <p class="muted">중고 매각 시 80~90% 원금 회수 가능 — 실물 자산형 투자.</p>
+            </div>
+            <div class="feature">
+              <h4>자동 정산</h4>
+              <p class="muted">대시보드에서 수익·상태를 실시간 확인, 매월 자동 입금.</p>
+            </div>
+          </div>
+
+          <div class="cta">
+            <button class="btn btn-primary" onclick="document.getElementById('apply').scrollIntoView({behavior:'smooth'})">지금 점주 신청하기</button>
+            <button class="btn" onclick="document.getElementById('calc').scrollIntoView({behavior:'smooth'})">수익 시뮬레이터 보기</button>
+          </div>
+
+        </div>
+
+        <aside class="hero-card" aria-hidden>
+          <h3 style="margin-top:0">예상 수익(예시)</h3>
+          <table style="width:100%;margin-top:8px">
+            <tr><th>모델</th><th>초기비용</th><th>월 순익(평균)</th><th>회수기간</th></tr>
+            <tr><td>RTX 3060Ti</td><td>1.7M</td><td>50~90K</td><td>18~24개월</td></tr>
+            <tr><td>RTX 4070</td><td>2.6M</td><td>110~160K</td><td>14~18개월</td></tr>
+            <tr><td>RTX 4080</td><td>3.95M</td><td>200~300K</td><td>13~16개월</td></tr>
+            <tr><td>RTX 4090</td><td>4.95M</td><td>290~440K</td><td>11~14개월</td></tr>
+          </table>
+
+          <p style="margin-top:12px;font-weight:700;color:#0f172a">원금 회수 후는 순이익만!</p>
+        </aside>
+      </section>
+
+      <section style="margin-top:26px">
+        <div class="hero-card">
+          <h3>왜 지금 시작해야 하나요?</h3>
+          <p class="muted">AI 서비스의 폭발적 성장으로 GPU 수요는 계속 증가하고 있습니다. 개인이 보유한 서버를 임대해주는 시장은 아직 초기 단계여서 첫 참여자에게 유리한 조건이 형성됩니다.</p>
+
+          <div style="display:flex;gap:12px;margin-top:12px;flex-wrap:wrap">
+            <div style="padding:12px;border-radius:12px;background:#f8fafc;border:1px solid #eef2ff;min-width:180px">
+              <strong>실물 자산</strong>
+              <p class="muted" style="margin:6px 0 0">GPU는 재판매 가능, 자산으로서 가치 유지.</p>
+            </div>
+            <div style="padding:12px;border-radius:12px;background:#f8fafc;border:1px solid #eef2ff;min-width:180px">
+              <strong>자동화</strong>
+              <p class="muted" style="margin:6px 0 0">원격 모니터링, 자동 정산 시스템 제공.</p>
+            </div>
+            <div style="padding:12px;border-radius:12px;background:#f8fafc;border:1px solid #eef2ff;min-width:180px">
+              <strong>저진입</strong>
+              <p class="muted" style="margin:6px 0 0">공간과 전기만 있으면 설치 가능—기술 진입장벽 낮음.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="calc" style="margin-top:22px">
+        <div class="hero-card">
+          <h3>수익 시뮬레이터 (간단)</h3>
+          <p class="muted">모델을 선택하고 월 임대가를 입력하면 대략적인 ROI(회수기간)를 계산합니다.</p>
+          <div style="display:flex;gap:12px;margin-top:12px;flex-wrap:wrap">
+            <div style="flex:1;min-width:220px">
+              <label>GPU 모델</label>
+              <select id="gpu">
+                <option value="3060" data-cost="1700000">RTX 3060Ti (1.7M)</option>
+                <option value="4070" data-cost="2600000">RTX 4070 (2.6M)</option>
+                <option value="4080" data-cost="3950000">RTX 4080 (3.95M)</option>
+                <option value="4090" data-cost="4950000">RTX 4090 (4.95M)</option>
+              </select>
+            </div>
+            <div style="flex:1;min-width:220px">
+              <label>월 평균 임대수익 (원)</label>
+              <input id="rev" type="number" placeholder="예: 200000" value="200000" />
+            </div>
+            <div style="flex:1;min-width:200px">
+              <label>월 운영비(전기+관리)(원)</label>
+              <input id="cost" type="number" placeholder="예: 40000" value="40000" />
+            </div>
+            <div style="flex:1;min-width:180px;align-self:end">
+              <button class="btn btn-primary" onclick="calcROI()">계산하기</button>
+            </div>
+          </div>
+
+          <div style="margin-top:12px;background:#f8fafc;padding:12px;border-radius:10px;border:1px solid #eef2ff">
+            <div id="result">ROI 결과가 여기 표시됩니다.</div>
+          </div>
+        </div>
+      </section>
+
+      <section style="margin-top:22px">
+        <div class="hero-card">
+          <h3>설치 절차 — 참여는 단 3단계</h3>
+          <div class="steps">
+            <div class="step">
+              <strong>1. 서버 구매 신청</strong>
+              <p class="muted">모델 선택 후 구매대행 혹은 직접 구매.</p>
+            </div>
+            <div class="step">
+              <strong>2. 설치 및 인증</strong>
+              <p class="muted">전기·네트워크 시공, 본사 기술팀이 방문 설치합니다.</p>
+            </div>
+            <div class="step">
+              <strong>3. 자동 수익</strong>
+              <p class="muted">플랫폼 연동 후 대시보드로 수익 확인, 매월 정산.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section style="margin-top:22px">
+        <div class="hero-card">
+          <h3>실제 점주 후기(샘플)</h3>
+          <div class="testimonial">
+            <div class="test-card">
+              <strong>"PC방에 2대 설치 후 월평균 180만원 추가 수익"</strong>
+              <p class="muted">"설치도 간편했고, 본사에서 모두 관리해줘서 신경 쓸 게 거의 없었어요."</p>
+            </div>
+            <div class="test-card">
+              <strong>"가게 유휴공간 활용으로 전기요금 부담보다 수익이 더 컸습니다"</strong>
+              <p class="muted">"되팔 때도 가치가 있어 마음이 든든합니다."</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="apply" style="margin-top:22px">
+        <div class="form">
+          <h3 style="margin-top:0">점주 신청하기</h3>
+          <p class="muted">아래 정보를 남겨주시면 담당자가 24시간 이내로 연락드립니다 (무료 컨설팅 제공).</p>
+          <label>이름</label>
+          <input id="name" placeholder="홍길동" />
+          <label>연락처(휴대폰)</label>
+          <input id="phone" placeholder="010-0000-0000" />
+          <label>설치 희망 장소</label>
+          <input id="place" placeholder="예: 매장명 / 주소(동까지만)" />
+          <label>예상 설치 대수</label>
+          <input id="qty" type="number" value="1" />
+
+          <div style="display:flex;gap:8px;margin-top:12px">
+            <button class="btn btn-primary" onclick="submitForm()">신청하기</button>
+            <button class="btn" onclick="alert('문의: support@servervending.example')">문의 메일 보기</button>
+          </div>
+          <p class="muted" style="margin-top:10px;font-size:13px">개인정보는 상담 목적 외 사용하지 않습니다.</p>
+        </div>
+      </section>
+
+    </main>
+
+    <footer>
+      © ServerVending — AI 서버 자판기 | 사업 문의: support@servervending.example
+    </footer>
   </div>
+
+  <script>
+    function calcROI(){
+      const sel = document.getElementById('gpu');
+      const costBase = Number(sel.selectedOptions[0].dataset.cost || 0);
+      const rev = Number(document.getElementById('rev').value || 0);
+      const cost = Number(document.getElementById('cost').value || 0);
+
+      const monthlyProfit = Math.max(0, rev - cost);
+      const months = monthlyProfit>0 ? Math.ceil(costBase / monthlyProfit) : '계산불가 (월 순익이 0 이하)';
+
+      const result = document.getElementById('result');
+      if(typeof months === 'number'){
+        result.innerHTML = `<strong>월 순이익:</strong> ${monthlyProfit.toLocaleString()}원<br><strong>추정 회수기간:</strong> ${months} 개월 (약 ${Math.round(months/12*100)/100} 년)`;
+      } else {
+        result.innerHTML = `<strong>월 순이익:</strong> ${monthlyProfit.toLocaleString()}원<br><strong>추정 회수기간:</strong> ${months}`;
+      }
+    }
+
+    function submitForm(){
+      const data = {
+        name: document.getElementById('name').value,
+        phone: document.getElementById('phone').value,
+        place: document.getElementById('place').value,
+        qty: document.getElementById('qty').value,
+      };
+      if(!data.name || !data.phone){
+        alert('이름과 연락처는 필수입니다.');
+        return;
+      }
+      // 더미 동작: 실제로는 서버로 POST 요청해야 합니다.
+      console.log('신청데이터',data);
+      alert('신청이 접수되었습니다. 담당자가 빠르게 연락드리겠습니다.');
+      // 폼 리셋
+      document.getElementById('name').value='';
+      document.getElementById('phone').value='';
+      document.getElementById('place').value='';
+      document.getElementById('qty').value='1';
+    }
+
+    // 초기 계산
+    calcROI();
+  </script>
 </body>
 </html>
